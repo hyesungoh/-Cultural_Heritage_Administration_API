@@ -2,10 +2,13 @@
 ## 문화재청 Open API 사용
 <hr>
 #### LikeLion 8th hackathon 출품 예정작 - 공아역에 사용
+
 - 사용자의 검색에 맞는 문화재 이미지 및 정보 출력을 위함
 
 <hr>
+
 ### 20.09.06 기준
+
 ```python
 import requests
 search_name = '숭례문'
@@ -13,7 +16,8 @@ url_list = 'http://www.cha.go.kr/cha/SearchKindOpenapiList.do?pageUnit=30&ccbaMn
 
 html = requests.get(url_list)
 ```
-requests를 사용하여 api 호출
+
+- requests를 사용하여 api 호출
 - 문화재청 api는 별도의 key가 존재하지 않음
 - ccbaMnm1은 문화재의 이름, 예를 들기 위하여 '숭례문'으로 설정
   <i>이름을 기준으로 문화재 검색을 위함</i>
@@ -23,7 +27,7 @@ requests를 사용하여 api 호출
 ```python
 sp_html = html.text.split('<sn>')
 ```
-호출한 값(html 형식)을 순번 태그인 `<sn>`을 기준으로 `split`함
+- 호출한 값(html 형식)을 순번 태그인 `<sn>`을 기준으로 `split`함
 
 ```python
 # 딕셔너리들이 들어갈 리스트

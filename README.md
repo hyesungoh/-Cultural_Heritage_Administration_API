@@ -56,3 +56,50 @@ for heritage in sp_html:
 - 각 값들을 `BeautifulSoup`을 사용하여 `parsing`
 - 필요한 내용의 이름과 값을 각 딕셔너리의 key와 value로 저장한 후 `searched_list`에 추가
 - `sp_html`에 head 태그와 같이 필요한 태그들이 존재하지 않은 요소들이 있기 때문에 `try`, `except`를 사용하여 예외처리
+
+
+### 20.09.08 기준
+
+```python
+for heritage in sp_html:
+    temp_html = BeautifulSoup(heritage, 'html.parser')
+    try:
+        temp_dict = {}
+        temp_dict['문화재명1'] = temp_html.ccbamnm1.text
+        temp_dict['문화재명2'] = temp_html.ccbamnm2.text
+        temp_dict['위치_도'] = temp_html.ccbactcdnm.text
+        temp_dict['위치_시'] = temp_html.ccsiname.text
+
+        temp_kbcd = temp_html.ccbakdcd.text
+        temp_dict['종목코드'] = temp_kbcd
+
+        temp_ctcd = temp_html.ccbactcd.text
+        temp_dict['시도코드'] = temp_ctcd
+
+        temp_anno = temp_html.ccbaasno.text
+        temp_dict['지정번호'] = temp_anno
+
+        temp_require = 'ccbaKdcd=' + temp_kbcd + '&ccbaCtcd=' + temp_ctcd + '&ccbaAsno=' + temp_anno
+
+        # img_url = 'http://www.cha.go.kr/cha/SearchImageOpenapi.do?' + temp_require
+        # img = requests.get(img_url)
+        # sp_img = img.text.split('<sn>')
+        # parsed_img = BeautifulSoup(sp_img[1], 'html.parser')
+        # temp_dict['이미지'] = parsed_img.imageurl.text
+
+        detail_url = 'http://www.cha.go.kr/cha/SearchKindOpenapiDt.do?' + temp_require
+
+        detail = requests.get(detail_url)
+        parsed_detail = BeautifulSoup(detail.text, 'html.parser')
+        temp_dict['이미지'] = parsed_detail.imageurl.text
+        temp_dict['내용'] = parsed_detail.content.text
+
+
+        searched_list.append(temp_dict)
+    except:
+        pass
+```
+
+- 문화재 이미지 검색 api와 문화재 상세정보 api를 둘 다 호출하지 않고 문화재 상세정보에 있는 대표 이미지를 사용
+- 상세정보 검색에 필요한 종목, 지정, 시도 코드를 변수로 지정 > url 요첨에 필요한 문자열을 변수로 지정
+- 문화재 검색과 같이 requests, BeautifulSoup를 사용

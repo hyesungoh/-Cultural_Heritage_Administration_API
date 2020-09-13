@@ -1,7 +1,7 @@
 # Cultural_Heritage_Administration_API
 ## 문화재청 Open API 사용
 <hr>
-#### LikeLion 8th hackathon 출품 예정작 `공아역`에 사용
+#### LikeLion 8th hackathon 출품 예정작 '공아역'에 사용
 
 - 사용자의 검색에 맞는 문화재 이미지 및 정보 출력을 위함
 

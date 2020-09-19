@@ -1,15 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
-search_name = '숭례문'
-# search_name = '화성'
+# search_name = '숭례문'
+search_name = '화성'
 # search_name = input()
 
-url_list = 'http://www.cha.go.kr/cha/SearchKindOpenapiList.do?pageUnit=30&ccbaMnm1=' + search_name
+# 파일 생성
+f = open("heritage.txt", 'a')
+
+
+url_list = 'http://www.cha.go.kr/cha/SearchKindOpenapiList.do?pageUnit=3&ccbaMnm1=' + search_name
+# url_list = 'http://www.cha.go.kr/cha/SearchKindOpenapiList.do'
 # url_search = 'http://www.cha.go.kr/cha/SearchKindOpenapiDt.do?ccbaCtcd=21&ccbaAsno=00&ccbaCtcd=11'
 # ccbaKdcd 종목코드, ccbaAsno 지정번호, ccbaCtcd 시도코드
 html = requests.get(url_list)
 
-
+# print(html.text)
 sp_html = html.text.split('<sn>')
 searched_list = []
 for heritage in sp_html:
@@ -55,7 +60,11 @@ print('몇개임? : ', len(searched_list))
 
 for i in searched_list:
     for key, value in i.items():
-        print(key, ': ', value)
+        txt_data = key + ':' + value
+        print(txt_data)
+        f.write(txt_data)
+
+f.close()
 
 print('\n\n이렇게 들어가 있음 : \n', searched_list[0])
 

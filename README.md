@@ -114,3 +114,17 @@ for heritage in sp_html:
 
 #### 20.09.18 기준
 - 모델 저장 페이지에서 api를 호출하여 저장하는 방법 대신, 로컬에서 api에서 필요한 정보를 뺀 파일을 만들어 그것을 이용하여 저장하는 방법을 사용할 예정
+
+#### 20.09.19 기준
+```python
+f = open("heritage.txt", 'a')
+
+... 중략
+
+for i in searched_list:
+    for key, value in i.items():
+        txt_data = key + ':' + value
+        f.write(txt_data)
+f.close()
+```
+- 파일 입출력을 이용하여 key와 value를 :로 나누어 저장, 이제 15000여개의 모델을 저장하면서 진행상황을 어떻게 볼지 고민중

@@ -128,3 +128,27 @@ for i in searched_list:
 f.close()
 ```
 - 파일 입출력을 이용하여 key와 value를 :로 나누어 저장, 이제 15000여개의 모델을 저장하면서 진행상황을 어떻게 볼지 고민중
+
+#### 20.09.20 기준
+```python
+url_list = 'http://www.cha.go.kr/cha/SearchKindOpenapiList.do?pageUnit=15944'
+```
+- api에서 가져올 요소의 수를 api에 존재하는 모든 문화재 수인 19544로 설정
+```python
+progress = 1
+for heritage in sp_html:
+    temp_html = BeautifulSoup(heritage, 'html.parser')
+    try:
+        temp_dict = {}
+        temp_dict['문화재명1'] = temp_html.ccbamnm1.text
+        ... 중략
+        print('현재 진행상황 : ', progress)
+        progress += 1
+    except:
+        pass
+```
+- 반복문에 출력문을 넣어 경과정도를 확인할 수 있게 함
+```python
+f.write(str(searched_list))
+```
+- 딕셔너리 자료형들로 이루어진 리스트를 문자열화하여 파일에 입력

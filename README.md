@@ -152,3 +152,19 @@ for heritage in sp_html:
 f.write(str(searched_list))
 ```
 - 딕셔너리 자료형들로 이루어진 리스트를 문자열화하여 파일에 입력
+#### 20.09.21 기준
+```python
+progress = 1
+for heritage in sp_html:
+    temp_html = BeautifulSoup(heritage, 'html.parser')
+    try:
+        temp_dict = {}
+        ... 중략
+        print(str(temp_dict))
+        f.write(str(temp_dict)+'\n')
+        print('현재 진행상황 : ', progress)
+        progress += 1
+    except:
+        pass
+```
+- 반복문에 출력문과 더불어 파일.write를 줄바꿈과 같이 저장하는 방식으로 바꿈

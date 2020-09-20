@@ -56,23 +56,23 @@ for heritage in sp_html:
         temp_dict['위도'] = parsed_detail.latitude.text
         searched_list.append(temp_dict)
 
+        print(str(temp_dict))
+        f.write(str(temp_dict)+'\n')
         print('현재 진행상황 : ', progress)
         progress += 1
     except:
         pass
 
-print('검색어 : ', search_name)
 print('몇개임? : ', len(searched_list))
 
-for i in searched_list:
-    for key, value in i.items():
-        txt_data = key + ':' + value + '\n'
-        print(txt_data)
+# for i in searched_list:
+#     for key, value in i.items():
+#         txt_data = key + ':' + value + '\n'
+#         print(txt_data)
         # f.write(txt_data)
 
-f.write(str(searched_list))
 f.close()
-
+print('저장종료')
 # print('\n\n이렇게 들어가 있음 : \n', searched_list[0])
 
 

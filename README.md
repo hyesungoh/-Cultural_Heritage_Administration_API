@@ -168,3 +168,35 @@ for heritage in sp_html:
         pass
 ```
 - 반복문에 출력문과 더불어 파일.write를 줄바꿈과 같이 저장하는 방식으로 바꿈
+
+#### 20.09.22 기준
+- `heritage.txt` 파일을 장고 프로젝트에 넣기 전 확인 용으로 `txt_reader.py`를 생성
+```python
+heritage_txt = open("heritage.txt", 'r')
+```
+- 읽기 전용으로 파일 open
+```python
+for _ in range(5):
+    line = heritage_txt.readline()
+    heritage_list.append(eval(line))
+# [{문화재1 정보}, {문화재2 정보}, ...]
+```
+- eval을 이용하여 문자열로 저장된 딕셔너리들을 새로운 리스트에 추가
+```python
+heritage_list = []
+i = 0
+while True:
+    line = heritage_txt.readline()
+    if not line: break
+    heritage_list.append(eval(line))
+
+    i += 1
+    if i % 100 == 0: print(i, "/ 19544")
+
+print(heritage_list[0]['문화재명1'])
+# 서울 숭례문
+print('총 문화재 수 : ', len(heritage_list))
+# 총 문화재 수 :  15944
+heritage_txt.close()
+```
+- 무한 반복문을 이용하여 파일 끝까지 readline하여 append

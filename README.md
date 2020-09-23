@@ -199,4 +199,4 @@ print('총 문화재 수 : ', len(heritage_list))
 # 총 문화재 수 :  15944
 heritage_txt.close()
 ```
-- 무한 반복문을 이용하여 파일 끝까지 readline하여 append
+- 무한 반복문을 이용하여 파일 끝까지 readline하여 append함

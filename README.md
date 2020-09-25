@@ -200,3 +200,36 @@ print('총 문화재 수 : ', len(heritage_list))
 heritage_txt.close()
 ```
 - 무한 반복문을 이용하여 파일 끝까지 readline하여 append함
+
+#### 20.09.25 기준
+- Django 프로젝트에서 기존에 저장한 .txt 파일을 이용하여 Model Heritage에 저장함
+```python
+if len(Heritage.objects.all()) > 10:
+      pass
+```
+- Heritage Model의 갯수가 10개 이하일 때만 txt 파일을 읽고 모델에 저장되도록 함
+```python
+else:
+      module_dir = os.path.dirname(__file__)
+      file_path = os.path.join(module_dir, '/Users/ohyeseong/Documents/django/dino_history/dino_history/heritage/heritage.txt')
+      heritage_txt = open(file_path, 'r')
+
+      while True:
+          line = heritage_txt.readline()
+          if not line: break
+
+          this_heritage = eval(line)
+
+          temp_heritage = Heritage()
+          temp_heritage.name = this_heritage['문화재명1']
+          temp_heritage.location = this_heritage['위치_도'] + this_heritage['위치_시']
+          temp_heritage.dynasty = this_heritage['시대']
+          temp_heritage.img_url = this_heritage['이미지']
+          temp_heritage.content = this_heritage['내용']
+          temp_heritage.longitude = this_heritage['경도']
+          temp_heritage.latitude = this_heritage['위도']
+          temp_heritage.save()
+
+  return render(request, 'heritage/save_test.html')
+```
+- 기존 `txt_reader.py`와 다르게 매 line마다 Heritage model을 생성 및 딕셔너리를 이용하여 저장

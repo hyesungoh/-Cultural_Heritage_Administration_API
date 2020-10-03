@@ -199,10 +199,10 @@ print('총 문화재 수 : ', len(heritage_list))
 # 총 문화재 수 :  15944
 heritage_txt.close()
 ```
-- 무한 반복문을 이용하여 파일 끝까지 readline하여 append함
+- 무한 반복문을 이용하여 파일 끝까지 readline하여 append
 
 #### 20.09.25 기준
-- Django 프로젝트에서 기존에 저장한 .txt 파일을 이용하여 Model Heritage에 저장함
+- Django 프로젝트에서 기존에 저장한 .txt 파일을 이용하여 Model Heritage에 저장
 ```python
 if len(Heritage.objects.all()) > 10:
       pass
